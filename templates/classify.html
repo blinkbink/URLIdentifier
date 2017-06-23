@@ -10,16 +10,37 @@
 
     <div class="well well-sm" style="margin-right:auto; margin-left:390px;width: 600px;height:350px;margin-top: 80px;">
         <h3 align="center">Result</h3><br>
-        <div class="alert alert-success">
-            <strong>{{ data_URL }} -> Is Save :) Link Not Indicate Adult Content.</strong>
-        </div>
-        <div class="alert alert-danger" >
-          <strong>{{ data_URL }} -> Not Save :( Link Indicate Adult Content</strong>
-        </div>
 
-        <h4>Site With Title : {{ data_Text }}</h4>
-        <p>*Note : </p>
-    </div>
+        {% if data_result == "Positif" and data_Text != "Mercusuar"%}
+            <div class="alert alert-success">
+                <table border="1">
+                    <tr><strong>URL :</strong> <p>{{ data_URL }}</p></tr>
+                    <tr><strong>Site With Title :</strong> <p>{{ data_Text }}</p></tr>
+                    <tr><strong>Status :</strong> <p> Save :) This Site Not Indicate Adult Content.</p></tr>
+                    <tr><strong>*Note : </strong> <p> </p></tr>
+                </table>
+            </div>
+        {% endif %}
+
+        {% if data_result == "Negativ" and data_Text != "Mercusuar"%}
+            <div class="alert alert-danger" >
+             <table border="1">
+                    <tr><strong>URL :</strong> <p>{{ data_URL }}</p></tr>
+                    <tr><strong>Site With Title :</strong> <p>{{ data_Text }}</p></tr>
+                    <tr><strong>Status :</strong> <p> Not Save :( This Site Indicate Adult Content</p></tr>
+             </table>
+            </div>
+        {% endif %}
+
+        {% if (data_Text == "Mercusuar" and data_result == "Positif") or (data_Text == "Mercusuar" and data_result == "Negativ")%}
+            <div class="alert alert-danger" >
+             <table border="1">
+                    <h3>Site Not Found</h3>
+             </table>
+            </div>
+        {% endif %}
+
+     </div>
 
 </body>
 </html>
